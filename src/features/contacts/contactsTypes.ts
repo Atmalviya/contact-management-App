@@ -3,4 +3,6 @@ export interface Contact {
   firstName: string;
   lastName: string;
   status: 'active' | 'inactive';
+  email: string;
+  phone: string;
 }

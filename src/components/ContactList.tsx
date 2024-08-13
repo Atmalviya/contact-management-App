@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
 import { deleteContact } from '../features/contacts/contactsSlice';
 import ContactModal from './ContactForm';
+import { Link } from 'react-router-dom';
+import { FiEdit } from "react-icons/fi";
+import { FaRegTrashAlt, FaExternalLinkAlt } from "react-icons/fa";
 
 const ContactList = () => {
   const contacts = useSelector((state: RootState) => state.contacts.contacts);
@@ -18,34 +21,40 @@ const ContactList = () => {
 
   if (contacts.length === 0) {
     return (
-      <div className="text-center text-gray-600">
-        No Contacts Available, Click on the "Add Contact" button to Add Contacts.
+      <div className="text-center text-gray-600 mt-8">
+        No Contacts Available. Click on the "Add Contact" button to add contacts.
       </div>
     );
   }
 
   return (
-    <div className="p-4">
+    <div className="p-6">
       <ul className="space-y-4">
         {contacts.map((contact) => (
-          <li key={contact.id} className="border p-4 rounded shadow-sm bg-white hover:bg-gray-50 transition-colors">
+          <li key={contact.id} className="border p-4 rounded-lg shadow-md bg-white hover:bg-gray-100 transition-colors duration-200">
             <div className="flex justify-between items-center">
               <div>
                 <h3 className="text-lg font-semibold">{`${contact.firstName} ${contact.lastName}`}</h3>
-                <p className="text-sm text-gray-600">Status: {contact.status}</p>
+                <p className="text-sm text-gray-500">Status: {contact.status}</p>
               </div>
-              <div>
+              <div className="flex items-center space-x-2">
+                <Link
+                  to={`/contacts/${contact.id}`}
+                  className="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600 transition-colors"
+                >
+                  <FaExternalLinkAlt />
+                </Link>
                 <button
                   onClick={() => handleEdit(contact.id)}
-                  className="bg-yellow-500 text-white py-1 px-3 rounded mr-2 hover:bg-yellow-600 transition-colors"
+                  className="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600 transition-colors"
                 >
-                  Edit
+                   <FiEdit />
                 </button>
                 <button
                   onClick={() => dispatch(deleteContact(contact.id))}
                   className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors"
                 >
-                  Delete
+                  <FaRegTrashAlt />
                 </button>
               </div>
             </div>

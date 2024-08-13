@@ -20,6 +20,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, contactId 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [status, setStatus] = useState<'active' | 'inactive'>('inactive');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
   useEffect(() => {
     if (isOpen) {
@@ -27,10 +29,14 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, contactId 
         setFirstName(contact.firstName);
         setLastName(contact.lastName);
         setStatus(contact.status);
+        setEmail(contact.email);
+        setPhone(contact.phone);
       } else {
         setFirstName('');
         setLastName('');
         setStatus('inactive');
+        setEmail('');
+        setPhone('');
       }
     }
   }, [isOpen, contactId, contact]);
@@ -42,6 +48,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, contactId 
       firstName,
       lastName,
       status,
+      email,
+      phone,
     };
     if (contactId) {
       dispatch(updateContact(newContact));
@@ -85,6 +93,26 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, contactId 
               className="border p-2 w-full"
               required
             />
+          </div>
+          <div className='mb-4'>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="border p-2 mb-2 w-full"
+            required
+          />
+          </div>
+          <div className='mb-4'>
+          <input
+            type="text"
+            placeholder="Phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="border p-2 mb-4 w-full"
+            required
+          />
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1">Status:</label>
