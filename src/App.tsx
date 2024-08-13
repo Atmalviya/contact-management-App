@@ -1,12 +1,15 @@
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ContactsPage from './pages/ContactsPage';
 
 function App() {
-
   return (
-    <div className=' '>
-      <p className=''>Hello World abc</p>
-    </div>
-  )
+    <Router>
+        <Routes>
+          <Route path="/" element={<ContactsPage />} />
+        </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
