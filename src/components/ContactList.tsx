@@ -16,32 +16,34 @@ const ContactList = () => {
     setIsModalOpen(true);
   };
 
-
   if (contacts.length === 0) {
-    return <div>No Contacts Available, Click on Add Contact Button to Add Contacts</div>;
+    return (
+      <div className="text-center text-gray-600">
+        No Contacts Available, Click on the "Add Contact" button to Add Contacts.
+      </div>
+    );
   }
 
   return (
     <div className="p-4">
-      <ul>
+      <ul className="space-y-4">
         {contacts.map((contact) => (
-          <li key={contact.id} className="border p-2 mb-2">
+          <li key={contact.id} className="border p-4 rounded shadow-sm bg-white hover:bg-gray-50 transition-colors">
             <div className="flex justify-between items-center">
               <div>
-                <h3 className="text-lg font-bold">{`${contact.firstName} ${contact.lastName}`}</h3>
-                
-                <p>Status: {contact.status}</p>
+                <h3 className="text-lg font-semibold">{`${contact.firstName} ${contact.lastName}`}</h3>
+                <p className="text-sm text-gray-600">Status: {contact.status}</p>
               </div>
               <div>
                 <button
                   onClick={() => handleEdit(contact.id)}
-                  className="bg-yellow-500 text-white py-1 px-2 rounded mr-2"
+                  className="bg-yellow-500 text-white py-1 px-3 rounded mr-2 hover:bg-yellow-600 transition-colors"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => dispatch(deleteContact(contact.id))}
-                  className="bg-red-500 text-white py-1 px-2 rounded"
+                  className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors"
                 >
                   Delete
                 </button>

@@ -27,11 +27,28 @@ const LineChart = () => {
         data: Object.values(data.cases),
         borderColor: 'rgba(75, 192, 192, 1)',
         fill: false,
+        tension: 0.4, // smooth lines
       },
     ],
   };
 
-  return <Line data={chartData} />;
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        ticks: {
+          maxTicksLimit: 100, // limit the number of ticks on x-axis for better readability
+        },
+      },
+    },
+  };
+
+  return (
+    <div className="relative h-64 sm:h-96 md:h-128">
+      <Line data={chartData} options={chartOptions} />
+    </div>
+  );
 };
 
 export default LineChart;
