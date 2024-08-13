@@ -55,7 +55,13 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, contactId 
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded shadow-lg w-96">
+      <div className="bg-white p-6 rounded shadow-lg w-96 relative">
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-1 px-2 rounded"
+        >
+          X
+        </button>
         <h2 className="text-lg font-bold mb-4">{contactId ? 'Edit Contact' : 'Create Contact Screen'}</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
