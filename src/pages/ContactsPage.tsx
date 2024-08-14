@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import ContactList from '../components/ContactList';
 import ContactModal from '../components/ContactForm';
 
-const ContactsPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const ContactsPage: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
 
   const openAddContactModal = () => {
-    setSelectedContactId(null); // Reset selected contact to null
-    setIsModalOpen(true);       // Open the modal
+    setSelectedContactId(null); 
+    setIsModalOpen(true);       
   };
 
   return (

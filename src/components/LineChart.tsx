@@ -1,8 +1,13 @@
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 
-const fetchHistoricalData = async () => {
+interface HistoricalData {
+  cases: Record<string, number>;
+}
+
+const fetchHistoricalData = async (): Promise<HistoricalData> => {
   const res = await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=all');
   if (!res.ok) {
     throw new Error('Network response was not ok');
@@ -10,8 +15,8 @@ const fetchHistoricalData = async () => {
   return res.json();
 };
 
-const LineChart = () => {
-  const { data, error, isLoading } = useQuery({
+const LineChart: React.FC = () => {
+  const { data, error, isLoading } = useQuery<HistoricalData>({
     queryKey: ['historicalData'],
     queryFn: fetchHistoricalData,
   });
@@ -20,14 +25,14 @@ const LineChart = () => {
   if (error) return <div>Error loading data: {(error as Error).message}</div>;
 
   const chartData = {
-    labels: Object.keys(data.cases),
+    labels: data ? Object.keys(data.cases) : [],
     datasets: [
       {
         label: 'Cases',
-        data: Object.values(data.cases),
+        data: data ? Object.values(data.cases) : [],
         borderColor: 'rgba(75, 192, 192, 1)',
         fill: false,
-        tension: 0.4, // smooth lines
+        tension: 0.4, 
       },
     ],
   };
@@ -38,7 +43,7 @@ const LineChart = () => {
     scales: {
       x: {
         ticks: {
-          maxTicksLimit: 100, // limit the number of ticks on x-axis for better readability
+          maxTicksLimit: 100, 
         },
       },
     },

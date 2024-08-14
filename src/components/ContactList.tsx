@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt, FaExternalLinkAlt } from "react-icons/fa";
 
-const ContactList = () => {
+const ContactList: React.FC = () => {
   const contacts = useSelector((state: RootState) => state.contacts.contacts);
   const dispatch = useDispatch();
 
@@ -28,31 +28,31 @@ const ContactList = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6 lg:p-8">
       <ul className="space-y-4">
         {contacts.map((contact) => (
-          <li key={contact.id} className="border p-4 rounded-lg shadow-md bg-white hover:bg-gray-100 transition-colors duration-200">
-            <div className="flex justify-between items-center">
-              <div>
+          <li key={contact.id} className="border p-4 sm:p-6 rounded-lg shadow-md bg-white hover:bg-gray-100 transition-colors duration-200">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+              <div className="mb-4 sm:mb-0">
                 <h3 className="text-lg font-semibold">{`${contact.firstName} ${contact.lastName}`}</h3>
                 <p className="text-sm text-gray-500">Status: {contact.status}</p>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex space-x-2">
                 <Link
                   to={`/contacts/${contact.id}`}
-                  className="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600 transition-colors"
+                  className="flex items-center justify-center bg-green-500 text-white p-2 rounded hover:bg-green-600 transition-colors"
                 >
                   <FaExternalLinkAlt />
                 </Link>
                 <button
                   onClick={() => handleEdit(contact.id)}
-                  className="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600 transition-colors"
+                  className="flex items-center justify-center bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600 transition-colors"
                 >
-                   <FiEdit />
+                  <FiEdit />
                 </button>
                 <button
                   onClick={() => dispatch(deleteContact(contact.id))}
-                  className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors"
+                  className="flex items-center justify-center bg-red-500 text-white p-2 rounded hover:bg-red-600 transition-colors"
                 >
                   <FaRegTrashAlt />
                 </button>
