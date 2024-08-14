@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
 import { deleteContact } from "../features/contacts/contactsSlice";
 import ContactModal from "./ContactForm";
-import { Contact } from "../features/contacts/contactsTypes"; 
+import { Contact } from "../features/contacts/contactsTypes";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -37,8 +37,10 @@ const ContactDetails: React.FC = () => {
   };
 
   const handleDelete = () => {
-    dispatch(deleteContact(id));
-    navigate("/"); // Redirect after deletion
+    if (id) {
+      dispatch(deleteContact(id));
+      navigate("/");
+    }
   };
 
   return (
