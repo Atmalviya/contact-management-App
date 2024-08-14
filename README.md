@@ -1,50 +1,136 @@
-# React + TypeScript + Vite
+# Contact Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a Contact Management App built with React, TypeScript, TailwindCSS, Redux, React Query, and Chart.js. The app allows users to add, edit, view, and delete contacts and features a responsive design. Additionally, it includes a Dashboard page that displays historical COVID-19 data on a line chart.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Contact Management:**
+  - Add new contacts with first name, last name, email, phone number, and status.
+  - Edit existing contacts.
+  - Delete contacts.
+  - View a list of all contacts.
 
-## Expanding the ESLint configuration
+- **Responsive Design:**
+  - Fully responsive layout with a sidebar for navigation.
+  - Sidebar can be toggled open and closed with a hamburger menu on smaller screens.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Dashboard:**
+  - Displays historical COVID-19 data using a responsive line chart.
+  - The sidebar remains fixed while the content scrolls vertically.
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Atmalviya/contact-management-App
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Go to the project directory
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+  cd contact-management-App
 ```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+
+## Deployment
+
+App is deployed on vercel, use following link to visit
+
+```bash
+  https://contact-managementapp.vercel.app/
+```
+
+
+## API Reference
+
+
+### 1. World Wide Data of Cases
+
+- **Endpoint:** `https://disease.sh/v3/covid-19/all`
+- **Description:** Fetches the latest worldwide data for COVID-19, including total cases, deaths, and recoveries.
+- **Method:** GET
+- **Response Example:**
+  ```json
+  {
+    "cases": 300000000,
+    "deaths": 5000000,
+    "recovered": 250000000,
+    "active": 45000000,
+    "updated": 1629307746353
+  }
+  
+
+### 2. Country-Specific Data of Cases
+
+- **Endpoint:** `https://disease.sh/v3/covid-19/countries`
+- **Description:** Fetches the latest COVID-19 data for all countries. This can be filtered to retrieve data for a specific country by appending the country name or ISO code..
+- **Method:** GET
+- **Response Example for all Countries:**
+  ```json
+  [
+  {
+    "country": "USA",
+    "cases": 40000000,
+    "deaths": 650000,
+    "recovered": 30000000,
+    "active": 9300000,
+    "updated": 1629307746353
+  },
+  ...
+]
+
+- **Response Example for a specific country:**
+  ```json
+  {
+  "country": "USA",
+  "cases": 40000000,
+  "deaths": 650000,
+  "recovered": 30000000,
+  "active": 9300000,
+  "updated": 1629307746353
+  }
+
+
+
+
+### 3. Graph Data for Cases with Date
+
+- **Endpoint:** `https://disease.sh/v3/covid-19/historical/all?lastdays=all`
+- **Description:** Fetches historical COVID-19 data for worldwide cases, deaths, and recoveries. The data is organized by date.
+- **Method:** GET
+- **Response Example:**
+  ```json
+  {
+  "cases": {
+    "1/22/20": 555,
+    "1/23/20": 654,
+    ...
+  },
+  "deaths": {
+    "1/22/20": 17,
+    "1/23/20": 18,
+    ...
+  },
+  "recovered": {
+    "1/22/20": 28,
+    "1/23/20": 30,
+    ...
+  }
+}
+
